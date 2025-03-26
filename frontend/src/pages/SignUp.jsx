@@ -10,7 +10,7 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [message, setMessage] = useState("");
-  const [showOTP, setShowOTP] = useState(false); // State to show OTP input
+  const [showOTP, setShowOTP] = useState(false);
 
   const goToLogin = () => {
     navigate("/");
@@ -18,7 +18,6 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.post("http://localhost:5001/api/signup", {
         username,
@@ -26,7 +25,6 @@ function SignUp() {
         password,
       });
 
-      // If OTP is sent, show the OTP input
       if (response.data.message === "OTP sent to your email") {
         alert("Check your email for the OTP");
         setShowOTP(true);
@@ -38,9 +36,10 @@ function SignUp() {
 
   const handleOTPSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await axios.post("http://localhost:5001/api/verify-otp", { email,username,password, otp });
+      const response = await axios.post("http://localhost:5001/api/verify-otp", { 
+        email, username, password, otp 
+      });
 
       if (response.data.message === "OTP verified") {
         alert("Account created successfully");
@@ -53,65 +52,48 @@ function SignUp() {
 
   return (
     <div className="container">
-      <div className="left">
-        <img
-          alt="A scenic view of an island"
-          height="600"
-          src="https://www.indowings.com/images/blog/mapping-blog.jpg"
-          width="450"
-        />
-        <div className="text">
-          {/* <h1>Join Now</h1> */}
-          <p>Create an account to Enter the world of Image processing</p>
-        </div>
-      </div>
-      <div className="right">
-        <h2>SignUp</h2>
-        {!showOTP ? (
-          <form onSubmit={handleSubmit}>
+      <h2>{!showOTP ? "Create Your Chat Account" : "Verify OTP"}</h2>
+      
+      {!showOTP ? (
+        <form onSubmit={handleSubmit}>
+          <input
+            placeholder="Username"
+            type="text"
+            required
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            placeholder="Email"
+            type="email"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            placeholder="Password"
+            type="password"
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <div className="error">{message}</div>
+          <button type="submit">Create Account</button>
+        </form>
+      ) : (
+        <form onSubmit={handleOTPSubmit}>
+          <div className="otp-container">
             <input
-              placeholder="Username"
               type="text"
-              required
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-              placeholder="Email"
-              type="email"
-              required
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              placeholder="Password"
-              type="password"
-              required
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <div className="error">{message}</div>
-            <button className="btn btn-primary" type="submit">
-              CREATE ACCOUNT
-            </button>
-          </form>
-        ) : (
-          <form onSubmit={handleOTPSubmit}>
-            <h3>Enter OTP</h3>
-            <input
               placeholder="Enter OTP"
-              type="text"
               required
               onChange={(e) => setOtp(e.target.value)}
             />
-            <div className="error">{message}</div>
-            <button className="btn btn-primary" type="submit">
-              VERIFY OTP
-            </button>
-          </form>
-        )}
-        <div className="or">Or</div>
-        <button className="btn btn-secondary" onClick={goToLogin}>
-          LOGIN
-        </button>
-      </div>
+          </div>
+          <div className="error">{message}</div>
+          <button type="submit">Verify OTP</button>
+        </form>
+      )}
+
+      <div className="or">Or</div>
+      <button className="btn-secondary" onClick={goToLogin}>Login</button>
     </div>
   );
 }
