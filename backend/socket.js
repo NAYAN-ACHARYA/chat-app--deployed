@@ -12,12 +12,12 @@ const setupSocket = (server) => {
   });
 
   io.on("connection", (socket) => {
-    console.log(`🔥 User connected: ${socket.id}`);
+    // console.log(`🔥 User connected: ${socket.id}`);
 
     // Store user ID when they join
     socket.on("registerUser", (userId) => {
       users.set(userId, socket.id);
-      console.log(`✅ User ${userId} registered with Socket ID ${socket.id}`);
+      // console.log(`✅ User ${userId} registered with Socket ID ${socket.id}`);
     });
 
     // Handle sending messages
@@ -50,7 +50,7 @@ const setupSocket = (server) => {
       users.forEach((value, key) => {
         if (value === socket.id) {
           users.delete(key);
-          console.log(`🚪 User ${key} disconnected.`);
+          // console.log(`🚪 User ${key} disconnected.`);
         }
       });
     });

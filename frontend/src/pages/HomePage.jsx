@@ -124,7 +124,7 @@ function HomePage() {
                 selectedContact === contact.username ? "active" : ""
               }`}
               onClick={() => {
-                console.log("Selected Contact:", contact.username, "Email:", contact.email); // Debug log
+                // console.log("Selected Contact:", contact.username, "Email:", contact.email); // Debug log
                 if (contact.email !== senderEmail) {
                   setSelectedContact(contact.username);
                   setReceiverEmail(contact.email);

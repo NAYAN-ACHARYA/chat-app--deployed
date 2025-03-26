@@ -44,7 +44,7 @@ router.post('/signup', async (req, res) => {
         // Generate OTP
         const otp = generateOTP();
         const otpExpiresAt = new Date(Date.now() + 5 * 60 * 1000); // OTP valid for 5 minutes
-        console.log(otp);
+        // console.log(otp);
 
         // Save OTP in database temporarily
         const newUser = new User({ username, email, password, otp, otpExpiresAt });
@@ -58,7 +58,7 @@ router.post('/signup', async (req, res) => {
                 text: `Enter this OTP to verify your email ${otp}`,
                 html: `<h1>Enter this OTP to verify your email ${otp}</h1>`,
             });
-            console.log("Message sent: %s", info.messageId);
+            // console.log("Message sent: %s", info.messageId);
         }
         SendEmail();
 
