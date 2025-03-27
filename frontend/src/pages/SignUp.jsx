@@ -19,7 +19,7 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5001/api/signup", {
+      const response = await axios.post("https://chat-app-deployed-j920.onrender.com/api/signup", {
         username,
         email,
         password,
@@ -37,7 +37,7 @@ function SignUp() {
   const handleOTPSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5001/api/verify-otp", { 
+      const response = await axios.post("https://chat-app-deployed-j920.onrender.com/api/verify-otp", { 
         email, username, password, otp 
       });
 

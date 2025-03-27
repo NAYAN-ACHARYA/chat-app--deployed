@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 import "../styles/HomePage.css"; // Import styles
 
 // Connect to WebSocket server
-const socket = io("http://localhost:5001");
+const socket = io("https://chat-app-deployed-j920.onrender.com");
 
 function HomePage() {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ function HomePage() {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await fetch("http://localhost:5001/api/contacts");
+        const response = await fetch("https://chat-app-deployed-j920.onrender.com/api/contacts");
         const data = await response.json();
   
         // ✅ Filter contacts to exclude the logged-in user
@@ -61,7 +61,7 @@ function HomePage() {
     const fetchMessages = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5001/api/recieveMessages/${senderEmail}/${receiverEmail}`
+          `https://chat-app-deployed-j920.onrender.com/api/recieveMessages/${senderEmail}/${receiverEmail}`
         );
         const data = await response.json();
         setMessages(data);

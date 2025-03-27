@@ -17,7 +17,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5001/api/login", {
+      const response = await axios.post("https://chat-app-deployed-j920.onrender.com/api/login", {
         email,
         password,
       });
