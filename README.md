@@ -119,6 +119,5 @@ in your frontend files (e.g., API calls inside `frontend/src/`).
 
 ---
 
-## 👨‍💻 Contributing
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/a630b93d-6630-478b-8027-d9ea14d63a85" />
 
-Feel free to submit issues or pull requests to improve the project.
